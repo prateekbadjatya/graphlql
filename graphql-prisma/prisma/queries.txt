@@ -1,0 +1,135 @@
+// create user
+
+
+ mutation {
+  createUser(data: {
+    name: "Prateek Badjatya"
+    email: "prateekbadjatya@gmail.com"
+  }){
+    id
+    name
+    email
+  }
+  
+}
+
+
+//fetch users
+query {
+  users {
+    id
+    name
+    posts {
+      title
+      id
+      body
+      comments {
+        text
+      }
+    }
+  }
+}
+
+//fetch user
+
+query {
+  user(where: {id: "cm2jfj0bz00ln0931co0luxi3"}) {
+    id
+    name
+    posts{
+      title
+    }
+  }
+}
+
+
+
+
+
+//update user
+mutation {
+  updateUser(data: {
+    name: "Prince"
+  }, where: {id: "cm2jej346007p0931wfxud6to"} ) {
+    id
+    name
+  }
+}
+
+
+// delete user
+
+mutation {
+  deleteUser(where: {id: "cm2jeoxxz008u0931qj97ivci"}) {
+    name
+    id
+  }
+}
+
+
+
+
+//create post
+mutation {
+  createPost (data: {
+    title: "my Second Post",
+    body: "prisma",
+    published:true,
+    author: {
+      connect: {
+        id: "cm2jfj0bz00ln0931co0luxi3"
+      }
+    }
+  }) {
+    title
+    body
+    author {
+      name
+    }
+  }
+}
+
+
+//create comment
+
+mutation {
+  createComment(data: {
+    text: "badjatya first comment",
+    author: {
+      connect : {
+        id: "cm2jfj0bz00ln0931co0luxi3"
+      }
+    },
+    post: {
+      connect: {
+        id:"cm2jggjrq00y00931lffm3fnd"
+      }
+    }
+  }
+  ) {
+    text
+  }
+}
+
+
+// update post
+mutation {
+  updatePost(data: {
+    title: "Prince Badjatya Post"
+    author: {
+      connect: {
+        id: "cm2jfj0bz00ln0931co0luxi3"
+      }
+    }
+  }, where: {
+    id: "cm2jggjrq00y00931lffm3fnd"
+  }) {
+    title
+    comments {
+      text 
+    }
+    author  { 
+          name
+    }
+  }
+}

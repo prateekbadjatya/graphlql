@@ -1,0 +1,23 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+./container/node_modules/
+./products/node_modules/
+node_modules/
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+
+# Nuxt.js build / generate output
+.nuxt
+./container/dist
+./products/dist
+dist

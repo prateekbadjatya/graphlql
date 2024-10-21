@@ -1,0 +1,33 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  posts: [Post!]!
+  comments: [Comment!]!
+}
+
+type Post {
+  id: ID! @unique
+  title: String!
+  body: String!
+  published: Boolean!
+  author: User!
+  comments: [Comment!]!
+}
+
+type Comment {
+  id: ID! @unique
+  text: String!
+  author: User!
+  post: Post!
+}
+
+#prisma automatically genrate some query, mutatiom and subscription
+#we just need to use it
+
+# The @unique that comes after our ID field definition. What we have right here is a GraphQL directive.
+# A directive is a way to modify the behavior of the field.
+# Now, directives are usually something that we need to create and then use, but clearly we haven't created anything called unique in our code.
+# This one is actually coming from Prisma, So Prisma provides us with various things to make our life a little bit easier.
+
+# And the @unique directive, as the name suggests, makes a given field unique.
