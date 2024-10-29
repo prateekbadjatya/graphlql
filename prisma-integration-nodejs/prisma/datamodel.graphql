@@ -1,8 +1,16 @@
+# on delete
+# SET_NULL --> default
+#Cascade --for example if we want to delete user so cascade will delete 
+# all things(data) associate to user
+# use @relation for cascade
+
+
 type User {
   id: ID! @unique
   name: String!
   email: String! @unique
-  # posts: [Post!]!
+  posts: [Post!]! @relation(name: "PostToUser", onDelete: CASCADE)
+  comments: [Comment!]! @relation(name: "CommentToUser", onDelete: CASCADE)
 }
 
 type Post {
@@ -10,12 +18,13 @@ type Post {
   title: String!
   body: String!
   published: Boolean!
-  author: User!
+  author: User! @relation(name: "PostToUser", onDelete: SET_NULL)
+   comments: [Comment!]! @relation(name: "CommentToPost", onDelete: CASCADE)
 }
 
 type Comment {
   id: ID! @unique
   text: String!
-  author: User!
-  post: Post!
+  author: User! @relation(name: "CommentToUser", onDelete: SET_NULL)
+  post: Post!  @relation(name: "CommentToPost", onDelete: SET_NULL)
 }
